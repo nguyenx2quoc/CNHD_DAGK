@@ -1,17 +1,17 @@
 <?php namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
-
+use Request;
 class get_san_bayController extends Controller {
 
-	public function index()
-	{
-    	if(Input::has('san-bay-di'))
-      	  return $this->get_san_bay_den();
-      	return $this->get_san_bay();
+	public function index(Request $request){		
+		if(Input::has('san-bay-di'))
+      	  	return $this->get_san_bay_den();
+      	return $this->get_san_bay(); 
+		
+    	
 	}
 
-	public function get_san_bay_den()
-	{
+	public function get_san_bay_den(){
 	    $input = Input::only('san-bay-di');
 		$sanbaydi = $input['san-bay-di'];
 		$dataread = san_bay_denModel::Select('san_bay_den')->Where('san_bay_di',$sanbaydi)->get()->toArray();
@@ -21,19 +21,17 @@ class get_san_bayController extends Controller {
 			$tempdata = san_bayModel::Where('ten',$dataread[$i]['san_bay_den'])->get()->toArray();
 			array_push($data,$tempdata[0]);		
 		}
-		$content = $this->encode_data_json($data);
+		$content = $this->encode_sanbay_json($data);
 		return response($content, 200)->header('Content-Type', 'application/json');	
 	}
 
-	public function get_san_bay()
-	{
+	public function get_san_bay(){
 		$data = san_bayModel::all()->toArray();
-		$content = $this->encode_data_json($data);
+		$content = $this->encode_sanbay_json($data);
 		return response($content, 200)->header('Content-Type', 'application/json');		
 	}
 	
-	private function encode_data_json(Array $a)
-	{
+	private function encode_sanbay_json(Array $a){
 		$data = array();
 		$i = 0;
 		for (; $i < count($a); $i++)
@@ -76,12 +74,13 @@ class get_san_bayController extends Controller {
 		}
 		return json_encode($data);
 	}
+
 }
 class KhuVuc{
-		 public $khuvuc = "";
-      	 public $sanbay  =array();
+	public $khuvuc = "";
+    public $sanbay  =array();
 }
 class SanBay{
-		 public $ten = "";
-      	 public $ma  ="";
+	public $ten = "";
+    public $ma  ="";
 }
