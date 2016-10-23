@@ -1,0 +1,25 @@
+.Tcenter{
+    text-align: center;
+}
+.Tbold{
+    font-weight: bold;
+}
+.DSinput{
+    margin-left: 40px;
+    width: 300px;
+    text-align: center;
+}
+.DSbutton{
+    float: right;
+    margin-right: 90px;
+}
+.Twhite{
+    color: white;
+}
+.TTdate{
+    width: 220px;
+    margin-top: -5px;
+}
+.TTSoghe{
+    width: 180px;
+}
