@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/newCascadeStyleSheet.css" rel="stylesheet" type="text/css"/>
+        <script src="css/jquery-1.10.2.min.js"></script>
+        <title></title>
+
+    </head>
+    <body>
+        <div style="width: 800px; height: auto" id="form1">
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>Đặt Vé</legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label"></label>
+                        <div class="col-lg-10">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="KhuHoi" >
+                                    Khứ hồi
+                                </label>
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="1Chieu">
+                                    1 Chiều
+                                </label>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTu" class="col-lg-2 col-xs-2 control-label">Từ:</label>
+                        <div class="col-lg-4 col-xs-9">
+                            <input type="text" class="form-control" id="inputTu" list="html"/> 
+                        </div>
+                        <label for="inputDen" class="col-lg-2 col-xs-2 control-label">Đến:</label>
+                        <div class="col-lg-4 col-xs-9">
+                            <input type="text" class="form-control" id="inputDen" list="html1"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-lg-2 col-xs-2 control-label">Ngày đi:</label>
+                        <div class="col-lg-4 col-xs-9">
+                            <input type="date" class="form-control date-picker" id="inputNgaydi" >
+                        </div>                      
+                        <label id="lbnv" class=" col-lg-2 col-xs-2 control-label">Ngày về:</label>
+                        <div class="col-lg-4 col-xs-9">
+                            <input type="date" class="form-control date-picker" id="inputNgayve" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputNguoiLon" class="col-sm-2  control-label">Người lớn</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="inputNguoiLon" placeholder="1">
+                        </div>
+                        <label for="inputTreem" class="col-sm-2 control-label">Trẻ em:</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="inputTreem" placeholder="2">
+                        </div>
+                        <label for="inputEmbe" class="col-sm-2  control-label">Em bé:</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="inputEmbe" placeholder="2">
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+            <div class="form-group">
+                <div class="col-sm-8"></div>
+                <div class="col-sm-4">
+                    <button class="btn btn-primary" id="qq">Tìm chuyến bay</button>
+                </div>
+            </div>
+        </div>
+        <?php
+        // put your code here
+        ?>
+    </body>
+    <script type="text/javascript">
+        $.ajax({
+            type: 'GET',
+            url: 'https://private-167575-test10548.apiary-mock.com/sanbay',
+            data: '',
+            dataType: 'json',
+            success: function (data) {
+                var Huyen = '<datalist id="html">';
+                for (var i = 0; i < data.SanBay.length; i++) {
+                    for (var j = 0; j < data.SanBay[i].San.length; j++) {
+                        Huyen = Huyen + '<option  value="' + data.SanBay[i].San[j].Ten + '">' + '</option>';
+                    }
+                }
+                Huyen = Huyen + '</datalist>';
+                $('#inputTu').html(Huyen);
+            } // Success Function
+        });
+        $(document).ready(function () {
+            $('#optionsRadios1').click(function () {
+                $('#inputNgayve').show();
+                $('#lbnv').show();
+            });
+            $('#optionsRadios2').click(function () {
+                $('#inputNgayve').hide();
+                $('#lbnv').hide();
+            
+            });
+
+            $("#inputTu").click(function(){
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://private-167575-test10548.apiary-mock.com/sanbay',
+                    data: '',
+                    dataType: 'json',
+                    success: function (data) {
+                        var Huyen = '<datalist id="html">';
+                        for (var i = 0; i < data.SanBay.length; i++) {
+                            for (var j = 0; j < data.SanBay[i].San.length; j++) {
+                                Huyen = Huyen + '<option  value="' + data.SanBay[i].San[j].Ten + '">' + '</option>';
+                            }
+                        }
+                        Huyen = Huyen + '</datalist>';
+                        $('#inputTu').html(Huyen);
+                    } // Success Function
+                });
+            });
+
+            $("#inputTu").change(function(){
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://private-167575-test10548.apiary-mock.com/sanbay?SanBayDi=Ha Noi',
+                    data: '',
+                    dataType: 'json',
+                    success: function (data) {
+                        var Huyen = '<datalist id="html1">';
+                        for (var i = 0; i < data.SanBay.length; i++) {
+                            for (var j = 0; j < data.SanBay[i].San.length; j++) {
+                                Huyen = Huyen + '<option  value="' + data.SanBay[i].San[j].Ten + '">' + '</option>';
+                            }
+                        }
+                        Huyen = Huyen + '</datalist>';
+                        $('#inputDen').html(Huyen);
+                    } // Success Function
+                });
+            });
+            $('#qq').click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://private-167575-test10548.apiary-mock.com/abc',
+                    data: { "AA" : "Hà Nội"},
+                    dataType: 'json',
+                    success: function (data) {
+                        var Huyen = '<datalist id="html1">';
+
+                        Huyen = Huyen + '<option  value="' + data.question + '">' + '</option>';
+
+
+                        Huyen = Huyen + '</datalist>';
+                        alert(Huyen);
+                    } // Success Function
+                });
+            });
+        });
+    </script>
+</html>
