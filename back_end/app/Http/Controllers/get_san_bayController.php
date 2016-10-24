@@ -21,14 +21,12 @@ class get_san_bayController extends Controller {
 			$tempdata = san_bayModel::Where('ten',$dataread[$i]['san_bay_den'])->get()->toArray();
 			array_push($data,$tempdata[0]);		
 		}
-		$content = $this->encode_sanbay_json($data);
-		return response($content, 200)->header('Content-Type', 'application/json');	
+		return $this->encode_sanbay_json($data);
 	}
 
 	public function get_san_bay(){
 		$data = san_bayModel::all()->toArray();
-		$content = $this->encode_sanbay_json($data);
-		return response($content, 200)->header('Content-Type', 'application/json');		
+		return $this->encode_sanbay_json($data);		
 	}
 	
 	private function encode_sanbay_json(Array $a){
@@ -72,7 +70,9 @@ class get_san_bayController extends Controller {
 					array_push ($data[$j]->sanbay, $tempsb);
 			}
 		}
-		return json_encode($data);
+		$returndata = new Data();
+		$returndata->Sb = $data;
+		return json_encode($returndata);
 	}
 
 }
@@ -83,4 +83,7 @@ class KhuVuc{
 class SanBay{
 	public $ten = "";
     public $ma  ="";
+}
+class Data{
+	public $Sb;
 }

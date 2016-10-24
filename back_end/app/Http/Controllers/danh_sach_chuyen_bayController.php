@@ -18,8 +18,7 @@ class danh_sach_chuyen_bayController extends Controller {
 		$ngaydi = $input['ngay-di'];
 		$soghe = $input['so-ghe'];
 		$fromdata = chuyen_bayModel::whereRaw('Noi_di = ? AND Noi_den = ? AND Ngay = ? AND So_luong_ghe >=?',[$sanbaydi,$sanbayden,$ngaydi,$soghe])->get()->toArray();
-		$content = $this->encode_chuyenbay1chieu_json($fromdata);
-		return response($content, 200)->header('Content-Type', 'application/json');
+		return $this->encode_chuyenbay1chieu_json($fromdata);
 	}
 
 	private function encode_chuyenbay1chieu_json(Array $a){
@@ -68,7 +67,9 @@ class danh_sach_chuyen_bayController extends Controller {
 					array_push ($returndata[$j]->ve, $tempvmb);
 			}
 		}
-		return json_encode($returndata);
+		$result = new Data();
+		$result->trave = $returndata;
+		return json_encode($result);
 	}
 
 	public function get_chuyen_bay_hai_chieu(){
@@ -80,8 +81,7 @@ class danh_sach_chuyen_bayController extends Controller {
 		$ngayve = $input['ngay-ve'];
 		$fromdatadi = chuyen_bayModel::whereRaw('Noi_di = ? AND Noi_den = ? AND Ngay = ? AND So_luong_ghe >=?',[$sanbaydi,$sanbayden,$ngaydi,$soghe])->get()->toArray();
 		$fromdatave = chuyen_bayModel::whereRaw('Noi_di = ? AND Noi_den = ? AND Ngay = ? AND So_luong_ghe >=?',[$sanbayden,$sanbaydi,$ngayve,$soghe])->get()->toArray();
-		$content = $this->encode_chuyenbay2chieu_json($fromdatadi,$fromdatave);
-		return response($content, 200)->header('Content-Type', 'application/json');
+		return $this->encode_chuyenbay2chieu_json($fromdatadi,$fromdatave);
 	}
 
 	private function encode_chuyenbay2chieu_json(Array $a, Array $b){
@@ -176,9 +176,15 @@ class danh_sach_chuyen_bayController extends Controller {
 					array_push ($returndata2[$j]->ve, $tempvmb);
 			}
 		}
-		array_push($result, $returndata);
-		array_push($result, $returndata2);
-		return json_encode($result);
+		$chieudi = new Chieudi();
+		$chieudi->chieudi = $returndata;
+		$chieuve = new Chieuve();
+		$chieuve->chieuve = $returndata2;
+		array_push($result, $chieudi);
+		array_push($result, $chieuve);
+		$dataresult = new Data();
+		$dataresult->trave = $result;
+		return json_encode($dataresult);
 	}
 }
 class ChuyenBay{
@@ -193,4 +199,13 @@ class VeMayBay{
 	public $hang = "";
 	public $muc = "";
 	public $gia = "";
+}
+class Data{
+	public $trave;
+}
+class Chieudi{
+	public $chieudi;
+}
+class Chieuve{
+	public $chieuve;
 }
