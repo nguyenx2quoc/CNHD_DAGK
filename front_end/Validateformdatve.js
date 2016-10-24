@@ -16,7 +16,8 @@ $('#qq').click(function () {
 function Validate() {
 
     if(document.getElementById('inputDen').value == "" || document.getElementById('inputNgaydi').value == ""
-        || document.getElementById('inputTu').value == "") {
+        || document.getElementById('inputTu').value == "" || document.getElementById("inputNguoiLon").value == ""
+        || document.getElementById("inputTreem").value == "" || document.getElementById("inputEmbe").value == "") {
         alert( "Vui lòng điền đầy đủ thông tin!" );
 
         return false;
