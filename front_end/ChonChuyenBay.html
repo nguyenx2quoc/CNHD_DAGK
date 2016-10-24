@@ -104,113 +104,208 @@ and open the template in the editor.
                 '</tr>'+
                 '</thead> <tdbody id="ccc1">';
                 for (var i = 0; i < data.trave[0].chieudi.length; i++) {
-
-                        Huyen = Huyen +'<tr>';
-                        Huyen = Huyen + '<td>';
-                        Huyen = Huyen + data.trave[0].chieudi[i].ma + '</td>';
-                        Huyen = Huyen + '<td>';
-                        Huyen = Huyen + data.trave[0].chieudi[i].noidi + '</td>';
-                        Huyen = Huyen + '<td>';
-                        Huyen = Huyen + data.trave[0].chieudi[i].noiden + '</td>';
-                        Huyen = Huyen + '<td>';
-                        Huyen = Huyen + data.trave[0].chieudi[i].ngaydi + '</td>';
-                        Huyen = Huyen + '<td>';
-                        Huyen = Huyen + data.trave[0].chieudi[i].gio + '</td>';
-                        for (var j = 0; j < data.trave[0].chieudi[i].ve.length; j++) {
-                            Huyen = Huyen + '<td>';
-
-                            Huyen = Huyen + '<input type="radio" name="optionsRadios" ' +
-                                    'id="optionsRadios'+ j +'" value="' + data.trave[0].chieudi[i].ve[j].gia +  '">'+ + data.trave[0].chieudi[i].ve[j].gia +'</td>';
+                    Huyen = Huyen +'<tr><td>';
+                    Huyen = Huyen + data.trave[0].chieudi[i].ma + '</td><td>';
+                    Huyen = Huyen + data.trave[0].chieudi[i].noidi + '</td><td>';
+                    Huyen = Huyen + data.trave[0].chieudi[i].noiden + '</td><td>';
+                    Huyen = Huyen + data.trave[0].chieudi[i].ngaydi + '</td><td>';
+                    Huyen = Huyen + data.trave[0].chieudi[i].gio + '</td>';
+                    var vitriYA = -1;
+                    var vitriYB = -1;
+                    var vitriYC = -1;
+                    var vitriCA = -1;
+                    var vitriCB = -1;
+                    var vitriCC = -1;
+                    for(var j = 0 ; j < data.trave[0].chieudi[i].ve.length; j++){
+                        if(data.trave[0].chieudi[i].ve[j].hang === "Y" && data.trave[0].chieudi[i].ve[j].muc === "A")
+                        {
+                            vitriYA = j;
                         }
-                        Huyen = Huyen + '</tr>';
+
+                        if(data.trave[0].chieudi[i].ve[j].hang === "Y" && data.trave[0].chieudi[i].ve[j].muc === "B")
+                        {
+                            vitriYB = j;
+                        }
+
+                        if(data.trave[0].chieudi[i].ve[j].hang === "Y" && data.trave[0].chieudi[i].ve[j].muc === "C")
+                        {
+                            vitriYC = j;
+                        }
+                        if(data.trave[0].chieudi[i].ve[j].hang === "C" && data.trave[0].chieudi[i].ve[j].muc === "A")
+                        {
+                            vitriCA = j;
+                        }
+                        if(data.trave[0].chieudi[i].ve[j].hang === "C" && data.trave[0].chieudi[i].ve[j].muc === "B")
+                        {
+                            vitriCB = j;
+                        }
+                        if(data.trave[0].chieudi[i].ve[j].hang === "C" && data.trave[0].chieudi[i].ve[j].muc === "C")
+                        {
+                            vitriCC = j;
+                        }
+                    }
+                    /*Tạo ô cho vé hạng Y mức A*/
+                    if( vitriYA != -1){
+                        Huyen = Huyen + '<td>';
+                        Huyen = Huyen + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios' + 0 + '" value=" ' + data.trave[0].chieudi[i].ve[vitriYA].gia + '">' +
+                                data.trave[0].chieudi[i].ve[vitriYA].gia + '</td>';
+                    }else {
+                        Huyen = Huyen + '<td> </td>';
                     }
 
-                    Huyen = Huyen + '</tdbody>';
-                    $('#cc').html(Huyen)
-                for (var i = 0; i < data.trave[1].chieuve.length; i++) {
-
-                    Huyen1 = Huyen1 +'<tr>';
-                    Huyen1 = Huyen1 + '<td>';
-                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].ma + '</td>';
-                    Huyen1 = Huyen1 + '<td>';
-                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].noidi + '</td>';
-                    Huyen1 = Huyen1 + '<td>';
-                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].noiden + '</td>';
-                    Huyen1 = Huyen1 + '<td>';
-                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].ngaydi + '</td>';
-                    Huyen1 = Huyen1 + '<td>';
-                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].gio + '</td>';
-                    for (var j = 0; j < data.trave[1].chieuve[i].ve.length; j++) {
-                        if(data.trave[1].chieuve[i].ve[j].hang === "Y")
-                        {
-                            if(data.trave[1].chieuve[i].ve[j].muc === "A")
-                            {
-                                Huyen1 = Huyen1 + '<td>';
-                                Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
-                                        'id="optionsRadios'+ j +'">' + data.trave[1].chieuve[i].ve[j].gia +  '</td>' ;
-                                break;
-                            }
-                            else {
-                                
-                            }
-                            if(data.trave[1].chieuve[i].ve[j].muc === "B")
-                            {
-                                Huyen1 = Huyen1 + '<td>';
-                                Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
-                                        'id="optionsRadios'+ j +'">' + data.trave[1].chieuve[i].ve[j].gia +  '</td>' ;
-                                break;
-                            }
-                            else {
-
-                            }
-                            if(data.trave[1].chieuve[i].ve[j].muc === "C")
-                            {
-                                Huyen1 = Huyen1 + '<td>';
-                                Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
-                                        'id="optionsRadios'+ j +'">' + data.trave[1].chieuve[i].ve[j].gia +  '</td>' ;
-                                break;
-                            }
-                            else {
-
-                            }
-                        }
-                        if(data.trave[1].chieuve[i].ve[j].hang === "C")
-                        {
-                            if(data.trave[1].chieuve[i].ve[j].muc === "A")
-                            {
-                                Huyen1 = Huyen1 + '<td>';
-                                Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
-                                        'id="optionsRadios'+ j +'">' + data.trave[1].chieuve[i].ve[j].gia +  '</td>' ;
-                                break;
-                            }else {
-
-                            }
-                            if(data.trave[1].chieuve[i].ve[j].muc === "B")
-                            {
-                                Huyen1 = Huyen1 + '<td>';
-                                Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
-                                        'id="optionsRadios'+ j +'">' + data.trave[1].chieuve[i].ve[j].gia +  '</td>' ;
-                                break;
-                            }else {
-
-                            }
-                            if(data.trave[1].chieuve[i].ve[j].muc === "C")
-                            {
-                                Huyen1 = Huyen1 + '<td>';
-                                Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
-                                        'id="optionsRadios'+ j +'">' + data.trave[1].chieuve[i].ve[j].gia +  '</td>' ;
-                                break;
-                            }else {
-
-                            }
-                        }
-
+                    /*Tạo ô cho vé hạng Y mức B*/
+                    if( vitriYB != -1){
+                        Huyen = Huyen + '<td>';
+                        Huyen = Huyen + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios' + 1 + '" value=" ' + data.trave[0].chieudi[i].ve[vitriYB].gia + '">' +
+                                data.trave[0].chieudi[i].ve[vitriYB].gia + '</td>';
+                    }else {
+                        Huyen = Huyen + '<td> </td>';
                     }
-                    Huyen1 = Huyen1 + '</tr>';
+
+                    /*Tạo ô cho vé hạng Y mức C*/
+                    if( vitriYC != -1){
+                        Huyen = Huyen + '<td>';
+                        Huyen = Huyen + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios' + 2 + '" value=" ' + data.trave[0].chieudi[i].ve[vitriYC].gia + '">' +
+                                data.trave[0].chieudi[i].ve[vitriYC].gia + '</td>';
+                    }else {
+                        Huyen = Huyen + '<td> </td>';
+                    }
+
+                    /*Tạo ô cho vé hạng C mức A*/
+                    if(vitriCA != -1){
+                        Huyen = Huyen + '<td>';
+                        Huyen = Huyen + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios' + 3 + '" value=" ' + data.trave[0].chieudi[i].ve[vitriCA].gia + '">' +
+                                data.trave[0].chieudi[i].ve[vitriCA].gia + '</td>';
+                    }else {
+                        Huyen = Huyen + '<td> </td>';
+                    }
+
+                    /*Tạo ô cho vé hạng C mức B*/
+                    if(vitriCB != -1){
+                        Huyen = Huyen + '<td>';
+                        Huyen = Huyen + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios' + 4 + '" value=" ' + data.trave[0].chieudi[i].ve[vitriCB].gia + '">' +
+                                data.trave[0].chieudi[i].ve[vitriCB].gia + '</td>';
+                    }else {
+                        Huyen = Huyen + '<td> </td>';
+                    }
+
+                    /*Tạo ô cho vé hạng C mức C*/
+                    if(vitriCC != -1){
+                        Huyen = Huyen + '<td>';
+                        Huyen = Huyen + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios' + 5 + '" value=" ' + data.trave[0].chieudi[i].ve[vitriCC].gia + '">' +
+                                data.trave[0].chieudi[i].ve[vitriCC].gia + '</td>';
+                    }else {
+                        Huyen = Huyen + '<td> </td>';
+                    }
+
+
+                        $('#cc').html(Huyen)
                 }
 
-                Huyen1 = Huyen1 + '</tdbody></table>';
-                $('#cc1').html(Huyen1)
+
+                for (var i = 0; i < data.trave[1].chieuve.length; i++) {
+                    Huyen1 = Huyen1 + '<tr><td>';
+                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].ma + '</td><td>';
+                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].noidi + '</td><td>';
+                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].noiden + '</td><td>';
+                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].ngaydi + '</td><td>';
+                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].gio + '</td>';
+                    var vitriYA = -1;
+                    var vitriYB = -1;
+                    var vitriYC = -1;
+                    var vitriCA = -1;
+                    var vitriCB = -1;
+                    var vitriCC = -1;
+                    for (var j = 0; j < data.trave[1].chieuve[i].ve.length; j++) {
+                        if (data.trave[1].chieuve[i].ve[j].hang === "Y" && data.trave[1].chieuve[i].ve[j].muc === "A") {
+                            vitriYA = j;
+                        }
+
+                        if (data.trave[1].chieuve[i].ve[j].hang === "Y" && data.trave[1].chieuve[i].ve[j].muc === "B") {
+                            vitriYB = j;
+                        }
+
+                        if (data.trave[1].chieuve[i].ve[j].hang === "Y" && data.trave[1].chieuve[i].ve[j].muc === "C") {
+                            vitriYC = j;
+                        }
+                        if (data.trave[1].chieuve[i].ve[j].hang === "C" && data.trave[1].chieuve[i].ve[j].muc === "A") {
+                            vitriCA = j;
+                        }
+                        if (data.trave[1].chieuve[i].ve[j].hang === "C" && data.trave[1].chieuve[i].ve[j].muc === "B") {
+                            vitriCB = j;
+                        }
+                        if (data.trave[1].chieuve[i].ve[j].hang === "C" && data.trave[1].chieuve[i].ve[j].muc === "C") {
+                            vitriCC = j;
+                        }
+                    }
+                    /*Tạo ô cho vé hạng Y mức A*/
+                    if (vitriYA != -1) {
+                        Huyen1 = Huyen1 + '<td>';
+                        Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios' + 6 + '" value=" ' + data.trave[1].chieuve[i].ve[vitriYA].gia + '">' +
+                                data.trave[1].chieuve[i].ve[vitriYA].gia + '</td>';
+                    } else {
+                        Huyen1 = Huyen1 + '<td> </td>';
+                    }
+
+                    /*Tạo ô cho vé hạng Y mức B*/
+                    if (vitriYB != -1) {
+                        Huyen1 = Huyen1 + '<td>';
+                        Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios' + 7 + '" value=" ' + data.trave[1].chieuve[i].ve[vitriYB].gia + '">' +
+                                data.trave[1].chieuve[i].ve[vitriYB].gia + '</td>';
+                    } else {
+                        Huyen1 = Huyen1 + '<td> </td>';
+                    }
+
+                    /*Tạo ô cho vé hạng Y mức C*/
+                    if (vitriYC != -1) {
+                        Huyen1 = Huyen1 + '<td>';
+                        Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios' + 8 + '" value=" ' + data.trave[1].chieuve[i].ve[vitriYC].gia + '">' +
+                                data.trave[1].chieuve[i].ve[vitriYC].gia + '</td>';
+                    } else {
+                        Huyen1 = Huyen1 + '<td> </td>';
+                    }
+
+                    /*Tạo ô cho vé hạng C mức A*/
+                    if (vitriCA != -1) {
+                        Huyen1 = Huyen1 + '<td>';
+                        Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios' + 9 + '" value=" ' + data.trave[1].chieuve[i].ve[vitriCA].gia + '">' +
+                                data.trave[1].chieuve[i].ve[vitriCA].gia + '</td>';
+                    } else {
+                        Huyen1 = Huyen1 + '<td> </td>';
+                    }
+
+                    /*Tạo ô cho vé hạng C mức B*/
+                    if (vitriCB != -1) {
+                        Huyen1 = Huyen1 + '<td>';
+                        Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios' + 10 + '" value=" ' + data.trave[1].chieuve[i].ve[vitriCB].gia + '">' +
+                                data.trave[1].chieuve[i].ve[vitriCB].gia + '</td>';
+                    } else {
+                        Huyen1 = Huyen1 + '<td> </td>';
+                    }
+
+                    /*Tạo ô cho vé hạng C mức C*/
+                    if (vitriCC != -1) {
+                        Huyen1 = Huyen1 + '<td>';
+                        Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios' + 11 + '" value=" ' + data.trave[1].chieuve[i].ve[vitriCC].gia + '">' +
+                                data.trave[1].chieuve[i].ve[vitriCC].gia + '</td>';
+                    } else {
+                        Huyen1 = Huyen1 + '<td> </td>';
+                    }
+                }
+                    Huyen1 = Huyen1 + '</tdbody></table>';
+                    $('#cc1').html(Huyen1)
             } // Success Function
         });
         $( "body" ).on( "click","#optionsRadios0", function() {
