@@ -14,9 +14,9 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <div class="row" style="width: 80%; height: auto" id="form1">
+        <div class="row" style="width: 90%; height: auto" >
             <div class="col-sm-9" >
-                <form class="form-horizontal" method="post">
+                <form class="form-horizontal" id="form1">
                     <fieldset>
                         <legend>Chọn chuyến bay</legend>
                     </fieldset>
@@ -40,14 +40,18 @@ and open the template in the editor.
 
                          </tbody>
                     </table>
-                    <div class="row">
-                        <div class="col-sm-10"></div>
-                        <div class="col-sm-2">
-                            <button class="btn btn-primary btn-sm">Tiếp tục</button>
-                        </div>
-                        
-                    </div>
+
                 </form>
+                <form class="form-horizontal" id="form2">
+                    <table class="table table-striped table-hover" id="cc1">
+                    </table>
+                </form>
+                <div class="row">
+                    <div class="col-sm-10"></div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-primary btn-sm">Tiếp tục</button>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-3">
                 <div class="list-group">
@@ -72,8 +76,6 @@ and open the template in the editor.
                         </div>
                     </div>
                 </div>
-                    
-                
             </div>
         </div>
     </body>
@@ -81,33 +83,134 @@ and open the template in the editor.
 
         $.ajax({
             type: 'GET',
-            url: 'cc.json',
+            url: '2chieu.json',
             data: '',
             dataType: 'json',
             success: function (data) {
                 var Huyen = '<tdbody id="cc">';
-                for (var i = 0; i < data.TraVe.length; i++) {
-                    Huyen = Huyen +'<tr>';
-                    Huyen = Huyen + '<td>';
-                    Huyen = Huyen + data.TraVe[i].Ma + '</td>';
-                    Huyen = Huyen + '<td>';
-                    Huyen = Huyen + data.TraVe[i].Noidi + '</td>';
-                    Huyen = Huyen + '<td>';
-                    Huyen = Huyen + data.TraVe[i].Noiden + '</td>';
-                    Huyen = Huyen + '<td>';
-                    Huyen = Huyen + data.TraVe[i].Ngaydi + '</td>';
-                    Huyen = Huyen + '<td>';
-                    Huyen = Huyen + data.TraVe[i].Gio + '</td>';
-                    for (var j = 0; j < data.TraVe[i].Ve.length; j++) {
+                var Huyen1 = '<table class="table table-striped table-hover" id="cc1">  <thead>'+
+                        '<tr class="info">'+
+                        '<th>Mã</th>'+
+                        '<th>Nơi đi</th>'+
+                '<th>Nơi đến</th>'+
+                '<th>Ngày</th>'+
+                '<th>Giờ</th>'+
+                '<th>Thương Gia A</th>'+
+                '<th>Thương Gia B</th>'+
+                '<th>Thương Gia c</th>'+
+                '<th>Phổ Thông A</th>'+
+                '<th>Phổ Thông B</th>'+
+                '<th>Phổ Thông C</th>'+
+                '</tr>'+
+                '</thead> <tdbody id="ccc1">';
+                for (var i = 0; i < data.trave[0].chieudi.length; i++) {
+
+                        Huyen = Huyen +'<tr>';
                         Huyen = Huyen + '<td>';
-                        Huyen = Huyen + '<input type="radio" name="optionsRadios" ' +
-                                'id="optionsRadios'+ j +'">' + data.TraVe[i].Ve[j].Gia +  '</td>';
+                        Huyen = Huyen + data.trave[0].chieudi[i].ma + '</td>';
+                        Huyen = Huyen + '<td>';
+                        Huyen = Huyen + data.trave[0].chieudi[i].noidi + '</td>';
+                        Huyen = Huyen + '<td>';
+                        Huyen = Huyen + data.trave[0].chieudi[i].noiden + '</td>';
+                        Huyen = Huyen + '<td>';
+                        Huyen = Huyen + data.trave[0].chieudi[i].ngaydi + '</td>';
+                        Huyen = Huyen + '<td>';
+                        Huyen = Huyen + data.trave[0].chieudi[i].gio + '</td>';
+                        for (var j = 0; j < data.trave[0].chieudi[i].ve.length; j++) {
+                            Huyen = Huyen + '<td>';
+
+                            Huyen = Huyen + '<input type="radio" name="optionsRadios" ' +
+                                    'id="optionsRadios'+ j +'" value="' + data.trave[0].chieudi[i].ve[j].gia +  '">'+ + data.trave[0].chieudi[i].ve[j].gia +'</td>';
+                        }
+                        Huyen = Huyen + '</tr>';
                     }
-                    Huyen = Huyen + '</tr>';
+
+                    Huyen = Huyen + '</tdbody>';
+                    $('#cc').html(Huyen)
+                for (var i = 0; i < data.trave[1].chieuve.length; i++) {
+
+                    Huyen1 = Huyen1 +'<tr>';
+                    Huyen1 = Huyen1 + '<td>';
+                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].ma + '</td>';
+                    Huyen1 = Huyen1 + '<td>';
+                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].noidi + '</td>';
+                    Huyen1 = Huyen1 + '<td>';
+                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].noiden + '</td>';
+                    Huyen1 = Huyen1 + '<td>';
+                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].ngaydi + '</td>';
+                    Huyen1 = Huyen1 + '<td>';
+                    Huyen1 = Huyen1 + data.trave[1].chieuve[i].gio + '</td>';
+                    for (var j = 0; j < data.trave[1].chieuve[i].ve.length; j++) {
+                        if(data.trave[1].chieuve[i].ve[j].hang === "Y")
+                        {
+                            if(data.trave[1].chieuve[i].ve[j].muc === "A")
+                            {
+                                Huyen1 = Huyen1 + '<td>';
+                                Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
+                                        'id="optionsRadios'+ j +'">' + data.trave[1].chieuve[i].ve[j].gia +  '</td>' ;
+                                break;
+                            }
+                            else {
+                                
+                            }
+                            if(data.trave[1].chieuve[i].ve[j].muc === "B")
+                            {
+                                Huyen1 = Huyen1 + '<td>';
+                                Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
+                                        'id="optionsRadios'+ j +'">' + data.trave[1].chieuve[i].ve[j].gia +  '</td>' ;
+                                break;
+                            }
+                            else {
+
+                            }
+                            if(data.trave[1].chieuve[i].ve[j].muc === "C")
+                            {
+                                Huyen1 = Huyen1 + '<td>';
+                                Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
+                                        'id="optionsRadios'+ j +'">' + data.trave[1].chieuve[i].ve[j].gia +  '</td>' ;
+                                break;
+                            }
+                            else {
+
+                            }
+                        }
+                        if(data.trave[1].chieuve[i].ve[j].hang === "C")
+                        {
+                            if(data.trave[1].chieuve[i].ve[j].muc === "A")
+                            {
+                                Huyen1 = Huyen1 + '<td>';
+                                Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
+                                        'id="optionsRadios'+ j +'">' + data.trave[1].chieuve[i].ve[j].gia +  '</td>' ;
+                                break;
+                            }else {
+
+                            }
+                            if(data.trave[1].chieuve[i].ve[j].muc === "B")
+                            {
+                                Huyen1 = Huyen1 + '<td>';
+                                Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
+                                        'id="optionsRadios'+ j +'">' + data.trave[1].chieuve[i].ve[j].gia +  '</td>' ;
+                                break;
+                            }else {
+
+                            }
+                            if(data.trave[1].chieuve[i].ve[j].muc === "C")
+                            {
+                                Huyen1 = Huyen1 + '<td>';
+                                Huyen1 = Huyen1 + '<input type="radio" name="optionsRadios" ' +
+                                        'id="optionsRadios'+ j +'">' + data.trave[1].chieuve[i].ve[j].gia +  '</td>' ;
+                                break;
+                            }else {
+
+                            }
+                        }
+
+                    }
+                    Huyen1 = Huyen1 + '</tr>';
                 }
 
-                Huyen = Huyen + '</tdbody>';
-                $('#cc').html(Huyen);
+                Huyen1 = Huyen1 + '</tdbody></table>';
+                $('#cc1').html(Huyen1)
             } // Success Function
         });
         $( "body" ).on( "click","#optionsRadios0", function() {
@@ -118,14 +221,9 @@ and open the template in the editor.
             Huyen = Huyen + 'Nơi đến:  ' + $(this).parents('tr').find('td:eq(2)').html() + '</div> <div>';
             Huyen = Huyen + 'Ngày đi:  ' + $(this).parents('tr').find('td:eq(3)').html() + '</div> <div>';
             Huyen = Huyen + 'Giờ:  ' + $(this).parents('tr').find('td:eq(4)').html() + '</div> <div>';
-            var a = $(this).parents('tr').find('td:eq(5)').html();
-            
-            a.valueOf();
-            console.log(a);
-
-
-
+            var a = document.getElementById("optionsRadios0").value;
             Huyen = Huyen + 'Giá vé:  ' + a + '</div> </div>';
+
             $('#chieudi').html(Huyen);
 
         });
@@ -136,7 +234,9 @@ and open the template in the editor.
             Huyen = Huyen + 'Nơi đến:  ' + $(this).parents('tr').find('td:eq(2)').html() + '</div> <div>';
             Huyen = Huyen + 'Ngày đi:  ' + $(this).parents('tr').find('td:eq(3)').html() + '</div> <div>';
             Huyen = Huyen + 'Giờ:  ' + $(this).parents('tr').find('td:eq(4)').html() + '</div> <div>';
-            Huyen = Huyen + 'Giá vé:  ' + $(this).parents('tr').find('td:eq(6)').html() + '</div> </div>';
+
+            var a = document.getElementById("optionsRadios1").value;
+            Huyen = Huyen + 'Giá vé:  ' + a + '</div> </div>';
             $('#chieudi').html(Huyen);
         });
         $( "body" ).on( "click","#optionsRadios2", function() {
@@ -146,7 +246,8 @@ and open the template in the editor.
             Huyen = Huyen + 'Nơi đến:  ' + $(this).parents('tr').find('td:eq(2)').html() + '</div> <div>';
             Huyen = Huyen + 'Ngày đi:  ' + $(this).parents('tr').find('td:eq(3)').html() + '</div> <div>';
             Huyen = Huyen + 'Giờ:  ' + $(this).parents('tr').find('td:eq(4)').html() + '</div> <div>';
-            Huyen = Huyen + 'Giá vé:  ' + $(this).parents('tr').find('td:eq(7)').html() + '</div> </div>';
+            var a = document.getElementById("optionsRadios2").value;
+            Huyen = Huyen + 'Giá vé:  ' + a + '</div> </div>';
             $('#chieudi').html(Huyen);
         });
         $( "body" ).on( "click","#optionsRadios3", function() {
@@ -156,7 +257,8 @@ and open the template in the editor.
             Huyen = Huyen + 'Nơi đến:  ' + $(this).parents('tr').find('td:eq(2)').html() + '</div> <div>';
             Huyen = Huyen + 'Ngày đi:  ' + $(this).parents('tr').find('td:eq(3)').html() + '</div> <div>';
             Huyen = Huyen + 'Giờ:  ' + $(this).parents('tr').find('td:eq(4)').html() + '</div> <div>';
-            Huyen = Huyen + 'Giá vé:  ' + $(this).parents('tr').find('td:eq(8)').html() + '</div> </div>';
+            var a = document.getElementById("optionsRadios3").value;
+            Huyen = Huyen + 'Giá vé:  ' + a + '</div> </div>';
             $('#chieudi').html(Huyen);
         });
         $( "body" ).on( "click","#optionsRadios4", function() {
@@ -166,9 +268,8 @@ and open the template in the editor.
             Huyen = Huyen + 'Nơi đến:  ' + $(this).parents('tr').find('td:eq(2)').html() + '</div> <div>';
             Huyen = Huyen + 'Ngày đi:  ' + $(this).parents('tr').find('td:eq(3)').html() + '</div> <div>';
             Huyen = Huyen + 'Giờ:  ' + $(this).parents('tr').find('td:eq(4)').html() + '</div> <div>';
-            var a = $(this).parents('tr').find('td:eq(9)').html();
-            a = a.substr(0,50);
-            Huyen = Huyen + 'Giá vé:  ' + $(this).parents('tr').find('td:eq(9)').html() + '</div> </div>';
+            var a = document.getElementById("optionsRadios4").value;
+            Huyen = Huyen + 'Giá vé:  ' + a + '</div> </div>';
             $('#chieudi').html(Huyen);
         });
         $( "body" ).on( "click","#optionsRadios5", function() {
@@ -178,8 +279,33 @@ and open the template in the editor.
             Huyen = Huyen + 'Nơi đến:  ' + $(this).parents('tr').find('td:eq(2)').html() + '</div> <div>';
             Huyen = Huyen + 'Ngày đi:  ' + $(this).parents('tr').find('td:eq(3)').html() + '</div> <div>';
             Huyen = Huyen + 'Giờ:  ' + $(this).parents('tr').find('td:eq(4)').html() + '</div> <div>';
-            Huyen = Huyen + 'Giá vé:  ' + $(this).parents('tr').find('td:eq(10)').html() + '</div> </div>';
+            var a = document.getElementById("optionsRadios5").value;
+            Huyen = Huyen + 'Giá vé:  ' + a + '</div> </div>';
             $('#chieudi').html(Huyen);
+        });
+        $("#inputTu").change(function(){
+            $.ajax({
+                type: 'POST',
+                url: 'aaa.json',
+                data:{
+                    name: 'abc',
+                    id:'zyd'
+
+                },
+                dataType: 'json',
+                success: function (data) {
+                    var Huyen = '<datalist id="html1">';
+                    for (var i = 0; i < data.Sb.length; i++) {
+                        for (var j = 0; j < data.Sb[i].sanbay.length; j++) {
+                            Huyen = Huyen + '<option  value="' + data.Sb[i].sanbay[j].ten +
+                                    '  ('+ data.Sb[i].sanbay[j].ma  + ' )'
+                                    + '">' + '</option>';
+                        }
+                    }
+                    Huyen = Huyen + '</datalist>';
+                    $('#inputDen').html(Huyen);
+                } // Success Function
+            });
         });
 
         /*

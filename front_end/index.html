@@ -15,20 +15,20 @@ and open the template in the editor.
 
     </head>
     <body>
-        <div style="width: 800px; height: auto" id="form1">
+        <div style="width: 60%; height: auto" id="form1">
             <form class="form-horizontal">
                 <fieldset>
                     <legend>Đặt Vé</legend>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label class="col-lg-2 col-xs-4 control-label"></label>
+                        <div class="col-lg-10 col-xs-8">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="KhuHoi" >
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="Khứ Hồi" >
                                     Khứ hồi
                                 </label>
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="1Chieu">
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="1 Chiều">
                                     1 Chiều
                                 </label>
                             </div>
@@ -37,11 +37,11 @@ and open the template in the editor.
                     </div>
                     <div class="form-group">
                         <label for="inputTu" class="col-lg-2 col-xs-2 control-label">Từ:</label>
-                        <div class="col-lg-4 col-xs-9">
+                        <div class="col-lg-4 col-xs-4">
                             <input type="text" class="form-control" id="inputTu" list="html"/> 
                         </div>
                         <label for="inputDen" class="col-lg-2 col-xs-2 control-label">Đến:</label>
-                        <div class="col-lg-4 col-xs-9">
+                        <div class="col-lg-4 col-xs-6">
                             <input type="text" class="form-control" id="inputDen" list="html1"/>
                         </div>
                     </div>
@@ -79,21 +79,19 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
-        <?php
-        // put your code here
-        ?>
+
     </body>
     <script type="text/javascript">
         $.ajax({
             type: 'GET',
-            url: 'https://private-167575-test10548.apiary-mock.com/sanbay',
+            url: 'Tatcasanbay.json',
             data: '',
             dataType: 'json',
             success: function (data) {
                 var Huyen = '<datalist id="html">';
-                for (var i = 0; i < data.SanBay.length; i++) {
-                    for (var j = 0; j < data.SanBay[i].San.length; j++) {
-                        Huyen = Huyen + '<option  value="' + data.SanBay[i].San[j].Ten + '">' + '</option>';
+                for (var i = 0; i < data.Sb.length; i++) {
+                    for (var j = 0; j < data.Sb[i].sanbay.length; j++) {
+                        Huyen = Huyen + '<option  value="' + data.Sb[i].sanbay[j].ten + '">' + '</option>';
                     }
                 }
                 Huyen = Huyen + '</datalist>';
@@ -114,18 +112,26 @@ and open the template in the editor.
             $("#inputTu").click(function(){
                 $.ajax({
                     type: 'GET',
-                    url: 'https://private-167575-test10548.apiary-mock.com/sanbay',
+                    url: 'Tatcasanbay.json',
                     data: '',
                     dataType: 'json',
                     success: function (data) {
-                        var Huyen = '<datalist id="html">';
-                        for (var i = 0; i < data.SanBay.length; i++) {
-                            for (var j = 0; j < data.SanBay[i].San.length; j++) {
-                                Huyen = Huyen + '<option  value="' + data.SanBay[i].San[j].Ten + '">' + '</option>';
+                        if(data != null)
+                        {
+                            var Huyen = '<datalist id="html">';
+                            for (var i = 0; i < data.Sb.length; i++) {
+                                for (var j = 0; j < data.Sb[i].sanbay.length; j++) {
+                                    Huyen = Huyen + '<option  value="' + data.Sb[i].sanbay[j].ten +
+                                            '  ('+ data.Sb[i].sanbay[j].ma  + ' )'
+                                            + '">' + '</option>';
+                                }
                             }
+                            Huyen = Huyen + '</datalist>';
+                            $('#inputTu').html(Huyen);
                         }
-                        Huyen = Huyen + '</datalist>';
-                        $('#inputTu').html(Huyen);
+                        else {
+                            var Huyen = ''
+                        }
                     } // Success Function
                 });
             });
@@ -133,14 +139,16 @@ and open the template in the editor.
             $("#inputTu").change(function(){
                 $.ajax({
                     type: 'GET',
-                    url: 'https://private-167575-test10548.apiary-mock.com/sanbay?SanBayDi=Ha Noi',
+                    url: 'aaa.json',/* ?san-bay-di=TP Ho Chi Minh*/
                     data: '',
                     dataType: 'json',
                     success: function (data) {
                         var Huyen = '<datalist id="html1">';
-                        for (var i = 0; i < data.SanBay.length; i++) {
-                            for (var j = 0; j < data.SanBay[i].San.length; j++) {
-                                Huyen = Huyen + '<option  value="' + data.SanBay[i].San[j].Ten + '">' + '</option>';
+                        for (var i = 0; i < data.Sb.length; i++) {
+                            for (var j = 0; j < data.Sb[i].sanbay.length; j++) {
+                                Huyen = Huyen + '<option  value="' + data.Sb[i].sanbay[j].ten +
+                                        '  ('+ data.Sb[i].sanbay[j].ma  + ' )'
+                                        + '">' + '</option>';
                             }
                         }
                         Huyen = Huyen + '</datalist>';
@@ -149,21 +157,75 @@ and open the template in the editor.
                 });
             });
             $('#qq').click(function () {
-                $.ajax({
-                    type: 'POST',
-                    url: 'https://private-167575-test10548.apiary-mock.com/abc',
-                    data: { "AA" : "Hà Nội"},
-                    dataType: 'json',
-                    success: function (data) {
-                        var Huyen = '<datalist id="html1">';
+                if($('#optionsRadios1').is(':checked')){
+                    $.ajax({
+                        type: 'GET',
+                        url: '2chieu.json',
+                        data: '',
+                        dataType: 'json',
+                        success: function (data) {
+                            var Huyen = '<tdbody id="cc">';
+                            for(var i=0; i < data.trave.length; i++){
+                                Huyen = Huyen +'<tr>';
+                                Huyen = Huyen + '<td>';
+                                Huyen = Huyen + data.trave[i].ma + '</td>';
+                                Huyen = Huyen + '<td>';
+                                Huyen = Huyen + data.trave[i].noidi + '</td>';
+                                Huyen = Huyen + '<td>';
+                                Huyen = Huyen + data.trave[i].noiden + '</td>';
+                                Huyen = Huyen + '<td>';
+                                Huyen = Huyen + data.trave[i].ngaydi + '</td>';
+                                Huyen = Huyen + '<td>';
+                                Huyen = Huyen + data.trave[i].gio + '</td>';
+                                for (var j = 0; j < data.trave[i].ve.length; j++) {
+                                    Huyen = Huyen + '<td>';
+                                    Huyen = Huyen + '<input type="radio" name="optionsRadios" ' +
+                                            'id="optionsRadios'+ j +'">' + data.trave[i].ve[j].gia +  '</td>';
+                                }
+                                Huyen = Huyen + '</tr>';
+                            }
 
-                        Huyen = Huyen + '<option  value="' + data.question + '">' + '</option>';
+                            Huyen = Huyen + '</tdbody>';
+                            console.log(Huyen);
 
 
-                        Huyen = Huyen + '</datalist>';
-                        alert(Huyen);
-                    } // Success Function
-                });
+
+                        } // Success Function
+                    });
+                }
+               if($('#optionsRadios2').is(':checked')){
+                   $.ajax({
+                       type: 'GET',
+                       url: '1chieu.json',
+                       data: '',
+                       dataType: 'json',
+                       success: function (data) {
+                           var Huyen = '<tdbody id="cc">';
+                           for (var i = 0; i < data.trave.length; i++) {
+                               Huyen = Huyen +'<tr>';
+                               Huyen = Huyen + '<td>';
+                               Huyen = Huyen + data.trave[i].ma + '</td>';
+                               Huyen = Huyen + '<td>';
+                               Huyen = Huyen + data.trave[i].noidi + '</td>';
+                               Huyen = Huyen + '<td>';
+                               Huyen = Huyen + data.trave[i].noiden + '</td>';
+                               Huyen = Huyen + '<td>';
+                               Huyen = Huyen + data.trave[i].ngaydi + '</td>';
+                               Huyen = Huyen + '<td>';
+                               Huyen = Huyen + data.trave[i].gio + '</td>';
+                               for (var j = 0; j < data.trave[i].ve.length; j++) {
+                                   Huyen = Huyen + '<td>';
+                                   Huyen = Huyen + '<input type="radio" name="optionsRadios" ' +
+                                           'id="optionsRadios'+ j +'">' + data.trave[i].ve[j].gia +  '</td>';
+                               }
+                               Huyen = Huyen + '</tr>';
+                           }
+
+                           Huyen = Huyen + '</tdbody>';
+                           alert(Huyen);
+                       } // Success Function
+                   });
+               }
             });
         });
     </script>
