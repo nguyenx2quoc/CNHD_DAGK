@@ -7,7 +7,7 @@ body{
 }
 
 #main{
-    width: 1000px;
+    width: 85%;
     padding: 0;
     margin-left: auto;
     margin-right: auto;
@@ -45,23 +45,23 @@ body{
 }
 
 #content{
-    width: 845px;
+    width: 950px;
     min-height: 450px;
     border: 1px solid #CDCDCD;
     float:left;
 
-    margin-right: 5px;
+    margin-right: 1px;
     margin-bottom: 5px;
     background-color: white;
-    opacity: 0.92;
+    opacity: 0.9;
 }
 #right{
-    width: 150px;
+    width: 195px;
     min-height: 450px;
     border: 1px solid #CDCDCD;
     float:right;
     margin-bottom: 5px;
-    background-color: orange;
+    background-color: #A4A4A4;
     opacity: 0.6;
 }
 
@@ -73,6 +73,18 @@ body{
     opacity: 0.6;
 }
 
+/* hình ảnh, lo go */
+ .headerlogo{
+     width: 190px; height: 105px; margin-left: 30px; margin-bottom: 5px;
+ }
+
+ .logocopyright{
+     padding-top: 7px;
+ }
+
+ .banquyen{
+     font-weight: bold; padding-top: 6px;
+ }
 /* kiêu chữ */
 .headertext{
     font-size: 25px;
