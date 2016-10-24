@@ -6,11 +6,11 @@ class dat_choController extends Controller {
 	public function index(Request $request){	
 		if ($request->has('ma_chuyen_bay_ve'))
 			return $this->make_id_2($request);
-		return $this->make_id_1();
+		return $this->make_id_1($request);
 			
 	}
 
-	public function make_id_1(){
+	public function make_id_1(Request $request){
 		$id_booking = "";
 		 	do{
 		 		$isexist = false;
@@ -97,6 +97,31 @@ class dat_choController extends Controller {
     		}
 
     		return $result;
+	}
+
+	public function xem_ma_dat_cho(){
+		$input = Input::only('ma-dat-cho');
+		$ma = $input['ma-dat-cho'];
+		$thongtin = chi_tiet_chuyen_bayModel::where('ma_dat_cho',$ma)->get()->toArray();
+		$tongtien = dat_choModel::Select('Tong_tien')->where('Ma',$ma)->get();
+		$data = new Thong_tin;
+		$data->tongtien = $tongtien[0]->Tong_tien;
+		$data->changbay = $thongtin;
+		return json_encode($data);
+	}
+
+	public function hoan_tat_dat_cho(Request $request){
+		if ($request->has('data')){
+		$id = $request->data;
+		$chodadat = dat_choModel::where('Ma',$id)->update(array('Trang_thai'=>"1"));
+		echo "Thanh cong";
+		}
+		else
+		echo "fail";
 	}	
+}
+class Thong_tin{
+	public $tongtien="";
+	public $changbay = array();
 }
 

@@ -26,3 +26,9 @@ Route::get('/test',function(){
    return view('testgd');
 });
 Route::post('/ban-ve-may-bay/phat-sinh-ma-dat-cho','dat_choController@index');
+Route::get('/ban-ve-may-bay/danh-sach-chang-bay','chang_bayController@index');
+Route::post('/ban-ve-may-bay/danh-sach-chang-bay','chang_bayController@index');
+Route::get('/ban-ve-may-bay/danh-sach-hanh-khach','hanh_khachController@index');
+Route::post('/ban-ve-may-bay/danh-sach-hanh-khach','hanh_khachController@index');
+Route::get('/ban-ve-may-bay/thong-tin-ma-dat-cho','dat_choController@xem_ma_dat_cho');
+Route::post('/ban-ve-may-bay/hoan-tat-dat-cho','dat_choController@hoan_tat_dat_cho');

@@ -4,10 +4,10 @@
     <title>Laravel Ajax CRUD Example</title>
 </head>
 <body>
-    <form action = "http://localhost/CNHD_DAGK/back_end/ban-ve-may-bay/phat-sinh-ma-dat-cho" method = "post">
+    <form action = "http://localhost/CNHD_DAGK/back_end/ban-ve-may-bay/hoan-tat-dat-cho" method = "post">
     	 <input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
         <input type = "submit" value = "test" />  
-        <input type = "text" name = "ma_chuyen_bay_ve"/>  
+        <input type = "text" name = "data"/>  
      </form>
 </body>
 </html>
