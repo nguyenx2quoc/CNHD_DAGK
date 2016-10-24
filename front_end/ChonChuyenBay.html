@@ -10,10 +10,11 @@ and open the template in the editor.
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/newCascadeStyleSheet.css" rel="stylesheet" type="text/css"/>
+        <script src="css/jquery-1.10.2.min.js"></script>
         <title></title>
     </head>
     <body>
-        <div class="row" style="width: 90%; height: auto" id="form1">
+        <div class="row" style="width: 80%; height: auto" id="form1">
             <div class="col-sm-9" >
                 <form class="form-horizontal" method="post">
                     <fieldset>
@@ -34,46 +35,10 @@ and open the template in the editor.
                               <th>Phổ Thông B</th>
                               <th>Phổ Thông C</th>
                             </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <td>A370</td>
-                                  <td>Hà Nội</td>
-                                  <td>TP.HCM</td>
-                                  <td>1/1/2017</td>
-                                  <td>9:00</td>
-                                  <td>
-                                      <a style="margin: auto">
-                                          <input type="radio" name="optionsRadios" id="optionsRadios1">
-                                      </a>
-                                  </td>
-                                  <td>
-                                      <a style="margin: auto">
-                                          <input type="radio" name="optionsRadios" id="optionsRadios2">
-                                      </a>
-                                  </td>
-                                  <td>
-                                      <a style="margin: auto">
-                                          <input type="radio" name="optionsRadios" id="optionsRadios3">
-                                      </a>
-                                  </td>
-                                  <td>
-                                      <a style="margin: auto">
-                                          <input type="radio" name="optionsRadios" id="optionsRadios4">
-                                      </a>
-                                  </td>
-                                  <td>
-                                      <a style="margin: auto">
-                                          <input type="radio" name="optionsRadios" id="optionsRadios5">
-                                      </a>
-                                  </td>
-                                  <td>
-                                      <a style="margin: auto">
-                                          <input type="radio" name="optionsRadios" id="optionsRadios6">
-                                      </a>
-                                  </td>                                 
-                              </tr>
-                          </tbody>
+                        </thead>
+                         <tbody id="cc">
+
+                         </tbody>
                     </table>
                     <div class="row">
                         <div class="col-sm-10"></div>
@@ -89,14 +54,8 @@ and open the template in the editor.
                     <div class="list-group-item-heading">
                         <h4>Tóm tắt chuyến đi</h4>
                     </div>
-                    <div class="list-group-item">
-                        <div>Chiều đi</div>
-                        <div>Phổ thông C</div>
-                        <div>Chuyến bay: A370</div>
-                        <div>Khởi hành: Hà Nội</div>
-                        <div>Đến: TP.HCM</div>
-                        <div>Thời gian: 9:00,01/01/2017</div>
-                        <div>Giá vé: 3.000.000</div>                       
+                    <div id="chieudi">
+
                     </div>
                     <div class="list-group-item">
                         <div>Hành khách: 1</div>
@@ -117,8 +76,130 @@ and open the template in the editor.
                 
             </div>
         </div>
-        <?php
-        // put your code here
-        ?>
     </body>
+    <script type="text/javascript">
+
+        $.ajax({
+            type: 'GET',
+            url: 'cc.json',
+            data: '',
+            dataType: 'json',
+            success: function (data) {
+                var Huyen = '<tdbody id="cc">';
+                for (var i = 0; i < data.TraVe.length; i++) {
+                    Huyen = Huyen +'<tr>';
+                    Huyen = Huyen + '<td>';
+                    Huyen = Huyen + data.TraVe[i].Ma + '</td>';
+                    Huyen = Huyen + '<td>';
+                    Huyen = Huyen + data.TraVe[i].Noidi + '</td>';
+                    Huyen = Huyen + '<td>';
+                    Huyen = Huyen + data.TraVe[i].Noiden + '</td>';
+                    Huyen = Huyen + '<td>';
+                    Huyen = Huyen + data.TraVe[i].Ngaydi + '</td>';
+                    Huyen = Huyen + '<td>';
+                    Huyen = Huyen + data.TraVe[i].Gio + '</td>';
+                    for (var j = 0; j < data.TraVe[i].Ve.length; j++) {
+                        Huyen = Huyen + '<td>';
+                        Huyen = Huyen + '<input type="radio" name="optionsRadios" ' +
+                                'id="optionsRadios'+ j +'">' + data.TraVe[i].Ve[j].Gia +  '</td>';
+                    }
+                    Huyen = Huyen + '</tr>';
+                }
+
+                Huyen = Huyen + '</tdbody>';
+                $('#cc').html(Huyen);
+            } // Success Function
+        });
+        $( "body" ).on( "click","#optionsRadios0", function() {
+
+            var Huyen = '<div class="list-group-item" id="chieudi"> <div>Chiều đi</div> <div>';
+            Huyen = Huyen + 'Chuyến bay:  ' + $(this).parents('tr').find('td:eq(0)').html() + '</div> <div>' ;
+            Huyen = Huyen + 'Khởi hành:  ' + $(this).parents('tr').find('td:eq(1)').html() + '</div> <div>';
+            Huyen = Huyen + 'Nơi đến:  ' + $(this).parents('tr').find('td:eq(2)').html() + '</div> <div>';
+            Huyen = Huyen + 'Ngày đi:  ' + $(this).parents('tr').find('td:eq(3)').html() + '</div> <div>';
+            Huyen = Huyen + 'Giờ:  ' + $(this).parents('tr').find('td:eq(4)').html() + '</div> <div>';
+            var a = $(this).parents('tr').find('td:eq(5)').html();
+            
+            a.valueOf();
+            console.log(a);
+
+
+
+            Huyen = Huyen + 'Giá vé:  ' + a + '</div> </div>';
+            $('#chieudi').html(Huyen);
+
+        });
+        $( "body" ).on( "click","#optionsRadios1", function() {
+            var Huyen = '<div class="list-group-item" id="chieudi"> <div>Chiều đi</div> <div>';
+            Huyen = Huyen + 'Chuyến bay:  ' + $(this).parents('tr').find('td:eq(0)').html() + '</div> <div>' ;
+            Huyen = Huyen + 'Khởi hành:  ' + $(this).parents('tr').find('td:eq(1)').html() + '</div> <div>';
+            Huyen = Huyen + 'Nơi đến:  ' + $(this).parents('tr').find('td:eq(2)').html() + '</div> <div>';
+            Huyen = Huyen + 'Ngày đi:  ' + $(this).parents('tr').find('td:eq(3)').html() + '</div> <div>';
+            Huyen = Huyen + 'Giờ:  ' + $(this).parents('tr').find('td:eq(4)').html() + '</div> <div>';
+            Huyen = Huyen + 'Giá vé:  ' + $(this).parents('tr').find('td:eq(6)').html() + '</div> </div>';
+            $('#chieudi').html(Huyen);
+        });
+        $( "body" ).on( "click","#optionsRadios2", function() {
+            var Huyen = '<div class="list-group-item" id="chieudi"> <div>Chiều đi</div> <div>';
+            Huyen = Huyen + 'Chuyến bay:  ' + $(this).parents('tr').find('td:eq(0)').html() + '</div> <div>' ;
+            Huyen = Huyen + 'Khởi hành:  ' + $(this).parents('tr').find('td:eq(1)').html() + '</div> <div>';
+            Huyen = Huyen + 'Nơi đến:  ' + $(this).parents('tr').find('td:eq(2)').html() + '</div> <div>';
+            Huyen = Huyen + 'Ngày đi:  ' + $(this).parents('tr').find('td:eq(3)').html() + '</div> <div>';
+            Huyen = Huyen + 'Giờ:  ' + $(this).parents('tr').find('td:eq(4)').html() + '</div> <div>';
+            Huyen = Huyen + 'Giá vé:  ' + $(this).parents('tr').find('td:eq(7)').html() + '</div> </div>';
+            $('#chieudi').html(Huyen);
+        });
+        $( "body" ).on( "click","#optionsRadios3", function() {
+            var Huyen = '<div class="list-group-item" id="chieudi"> <div>Chiều đi</div> <div>';
+            Huyen = Huyen + 'Chuyến bay:  ' + $(this).parents('tr').find('td:eq(0)').html() + '</div> <div>' ;
+            Huyen = Huyen + 'Khởi hành:  ' + $(this).parents('tr').find('td:eq(1)').html() + '</div> <div>';
+            Huyen = Huyen + 'Nơi đến:  ' + $(this).parents('tr').find('td:eq(2)').html() + '</div> <div>';
+            Huyen = Huyen + 'Ngày đi:  ' + $(this).parents('tr').find('td:eq(3)').html() + '</div> <div>';
+            Huyen = Huyen + 'Giờ:  ' + $(this).parents('tr').find('td:eq(4)').html() + '</div> <div>';
+            Huyen = Huyen + 'Giá vé:  ' + $(this).parents('tr').find('td:eq(8)').html() + '</div> </div>';
+            $('#chieudi').html(Huyen);
+        });
+        $( "body" ).on( "click","#optionsRadios4", function() {
+            var Huyen = '<div class="list-group-item" id="chieudi"> <div>Chiều đi</div> <div>';
+            Huyen = Huyen + 'Chuyến bay:  ' + $(this).parents('tr').find('td:eq(0)').html() + '</div> <div>' ;
+            Huyen = Huyen + 'Khởi hành:  ' + $(this).parents('tr').find('td:eq(1)').html() + '</div> <div>';
+            Huyen = Huyen + 'Nơi đến:  ' + $(this).parents('tr').find('td:eq(2)').html() + '</div> <div>';
+            Huyen = Huyen + 'Ngày đi:  ' + $(this).parents('tr').find('td:eq(3)').html() + '</div> <div>';
+            Huyen = Huyen + 'Giờ:  ' + $(this).parents('tr').find('td:eq(4)').html() + '</div> <div>';
+            var a = $(this).parents('tr').find('td:eq(9)').html();
+            a = a.substr(0,50);
+            Huyen = Huyen + 'Giá vé:  ' + $(this).parents('tr').find('td:eq(9)').html() + '</div> </div>';
+            $('#chieudi').html(Huyen);
+        });
+        $( "body" ).on( "click","#optionsRadios5", function() {
+            var Huyen = '<div class="list-group-item" id="chieudi"> <div>Chiều đi</div> <div>';
+            Huyen = Huyen + 'Chuyến bay:  ' + $(this).parents('tr').find('td:eq(0)').html() + '</div> <div>' ;
+            Huyen = Huyen + 'Khởi hành:  ' + $(this).parents('tr').find('td:eq(1)').html() + '</div> <div>';
+            Huyen = Huyen + 'Nơi đến:  ' + $(this).parents('tr').find('td:eq(2)').html() + '</div> <div>';
+            Huyen = Huyen + 'Ngày đi:  ' + $(this).parents('tr').find('td:eq(3)').html() + '</div> <div>';
+            Huyen = Huyen + 'Giờ:  ' + $(this).parents('tr').find('td:eq(4)').html() + '</div> <div>';
+            Huyen = Huyen + 'Giá vé:  ' + $(this).parents('tr').find('td:eq(10)').html() + '</div> </div>';
+            $('#chieudi').html(Huyen);
+        });
+
+        /*
+        $('body').on('click', 'a.actionbtn', function () {
+
+
+
+            if (a == "") {
+                document.getElementById('InputEmail').value = document.getElementById('InputEmail').value
+                        + $(this).parents('tr').find('td:eq(1)').html() + ";";
+            }
+            else {
+                if (a.indexOf($(this).parents('tr').find('td:eq(1)').html().toString()) == -1) {
+                    document.getElementById('InputEmail').value = document.getElementById('InputEmail').value
+                            + $(this).parents('tr').find('td:eq(1)').html() + ";";
+                }
+            }
+         });
+*/
+
+
+    </script>
 </html>
