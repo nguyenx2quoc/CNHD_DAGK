@@ -1,0 +1,39 @@
+{
+    "Sb": [
+        {
+            "khuvuc":"VIET NAM",
+            "sanbay":[
+                {
+                    "ten":"Ha Noi",
+                    "ma":"HAN"
+                },{
+                    "ten":"Da Lat",
+                    "ma":"DLI"
+                },{
+                    "ten":"Quy Nhon",
+                    "ma":"UIH"
+                },{
+                    "ten":"Tp Ho Chi Minh",
+                    "ma":"SGN"
+                }
+            ]
+        },
+        {
+            "khuvuc":"AUSTRALIA",
+            "sanbay":[
+                {
+                    "ten":"Sydney",
+                    "ma":"SYD"
+                }
+            ]
+        },{
+            "khuvuc":"EUROPE",
+            "sanbay":[
+                {
+                    "ten":"London",
+                    "ma":"LHR"
+                }
+            ]
+        }
+    ]
+}
