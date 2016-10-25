@@ -4,14 +4,13 @@
 $(document).ready(function(){
 
     <!--1 Đăt ve roi đến chọn CB -->
-    $("#BtTimCB").click(function(){
-        $("#FormChonCB").removeClass('hidden');
-        $("#FormDatVe").addClass('hidden');
-    });
+
     <!-- 2 chọn CB rồi đến điền thông tin -->
     $("#BtTieptuc1").click(function(){
         $("#FormTTKH").removeClass('hidden');
         $("#FormChonCB").addClass('hidden');
+        $("#FormChonCB2").addClass('hidden');
+        $("#BtTieptuc1").addClass('hidden');
     });
 
     <!-- 3 Điền thông tin rồi thanh toán -->
@@ -26,8 +25,7 @@ $(document).ready(function(){
     });
     <!--5 Bao đặt chỗ thành công-->
     $("#btDCTC").click(function(){
-        $("#FormHoanTatDC").removeClass('hidden');
-        $("#FormThanhToan").addClass('hidden');
+        alert('Xác nhận: Thanh toán và đặt chỗ thành công!');
     });
 
 
@@ -43,6 +41,8 @@ $(document).ready(function(){
             $("#FormDatVe").removeClass('hidden');
         }
          $("#FormChonCB").addClass('hidden');
+        $("#FormChonCB2").addClass('hidden');
+        $("#BtTieptuc1").addClass('hidden');
          $("#FormTTKH").addClass('hidden');
          $("#FormThanhToan").addClass('hidden');
          $("#FormHoanTatDC").addClass('hidden');

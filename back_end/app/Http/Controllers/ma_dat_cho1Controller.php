@@ -29,6 +29,7 @@ class ma_dat_cho1Controller extends Controller {
 		 	$datcho->Thoi_gian_dat = date("Y-m-d H:i:s",strtotime($request->thoigiandatcho));
 		 	$datcho->Tong_tien = $request->tongtien;
 		 	$datcho->Trang_thai = "0";
+		 	$datcho->So_ghe = $request->soghe;
 		 	$datcho->save();
 		 	$chitiet = new chi_tiet_chuyen_bayModel();
 		 	$chitiet->ma_dat_cho = $id_booking;
@@ -42,7 +43,9 @@ class ma_dat_cho1Controller extends Controller {
 		 	$chitiet->noi_di = $request->noidi;
 		 	$chitiet->noi_den = $request->noiden;
 		 	$chitiet->save();
-		 	return $id_booking;
+		 	$data = new MaDatCho();
+		 	$data->ma_dat_cho = $id_booking ;
+		 	return json_encode($data);
 			
 	}
 	private function make_auto_id(){
@@ -82,4 +85,8 @@ class Thong_tin{
 	public $tongtien="";
 	public $changbay = array();
 }
+class MaDatCho{
+	public $ma_dat_cho;
+}
+
 

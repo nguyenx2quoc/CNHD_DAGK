@@ -4,8 +4,10 @@ use Illuminate\Http\Request;
 
 class chang_bayController extends Controller {
 	public function index(Request $request){
-		$fromdata = chuyen_bayModel::all()->tojSon();
-		return $fromdata;
+		$data = new Trave();
+		$fromdata = chuyen_bayModel::all()->toArray();
+		$data->trave = $fromdata;
+		return json_encode($data);
 	}
 
 	public function them_chuyen_bay(Request $request){
@@ -21,5 +23,8 @@ class chang_bayController extends Controller {
 		$data->Gia=$request->gia;
 		$data->save();
 	}
+}
+class Trave{
+	public $trave;
 }
 

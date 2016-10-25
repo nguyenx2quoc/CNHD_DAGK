@@ -21,10 +21,17 @@ class thong_tin_ma_dat_choController extends Controller {
 	public function hoan_tat_dat_cho(Request $request){
 		$id = $request->madatcho;
 		$chodadat = dat_choModel::where('Ma',$id)->update(array('Trang_thai'=>"1"));
-		echo "Thanh cong";
+		$soghedadat = dat_choModel::Select('So_ghe')->Where('Ma',$id)->get()->toArray();
+		$chuyenbaycapnhat = chi_tiet_chuyen_bayModel::Select('ma_chuyen_bay','hang','muc')->where('ma_dat_cho',$id)->get()->toArray();
+		
+		$i = 0;
+		for (; $i < count($chuyenbaycapnhat); $i++)
+		{
+			$soghecu = chuyen_bayModel::Select('So_luong_ghe')->whereRaw('Ma = ? AND Hang = ? AND Muc = ?',[$chuyenbaycapnhat[$i]['ma_chuyen_bay'],$chuyenbaycapnhat[$i]['hang'],$chuyenbaycapnhat[$i]['muc']])->get()->toArray();
+			$somoi = (int)$soghecu[0]['So_luong_ghe'] - (int)$soghedadat[0]['So_ghe'];
+			$capnhatghe = chuyen_bayModel::whereRaw('Ma = ? AND Hang = ? AND Muc = ?',[$chuyenbaycapnhat[$i]['ma_chuyen_bay'],$chuyenbaycapnhat[$i]['hang'],$chuyenbaycapnhat[$i]['muc']])->update(array('So_luong_ghe'=>$somoi));
 		}
-		else
-		echo "fail";
+		return true;
 	}	
 }
 class Thong_tin{

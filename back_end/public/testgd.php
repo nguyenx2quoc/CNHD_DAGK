@@ -17,11 +17,11 @@
             console.log(token);
             $.ajax({
                 type:"POST",
-                url:"../back_end/ve-may-bay/danh-sach-hanh-khach",
+                url:"../back_end/ve-may-bay/ma-dat-cho1",
                 data:{
 
                     /****Dat cho 1 chieu****/
-                    // thoigiandatcho: '<?php //echo date("Y-m-d H:i:s")?>',
+                    // thoigiandatcho: '<?php echo date("Y-m-d H:i:s")?>',
                     // tongtien: '5000000',
                     // machuyenbay:'MH370',
                     // ngaydi:'2016-10-23',
@@ -37,40 +37,40 @@
                     /****Dat cho 2 chieu****/
                     // thoigiandatcho: '<?php //echo date("Y-m-d H:i:s")?>',
                     // tongtien: '5000000',
-                    // machuyenbay:'MH370',
+                    // machuyenbay:'AH100',
                     // ngaydi:'2016-10-23',
                     // giobay:'09:00:00',
                     // hang:'Y',
-                    // muc:'C',
+                    // muc:'B',
                     // loai:'di',
                     // soghe:'2',
-                    // noidi: 'Ha Noi',
-                    // noiden:'Tp Ho Chi Minh',
-                    // machuyenbay2:'MH371',
+                    // noidi: 'Tp Ho Chi Minh',
+                    // noiden:'Ha Noi',
+                    // machuyenbay2:'AH333',
                     // ngaydi2:'2016-10-23',
-                    // giobay2:'09:00:00',
-                    // hang2:'Y',
+                    // giobay2:'09:45:00',
+                    // hang2:'C',
                     // muc2:'C',
                     // loai2:'ve',
                     // soghe2:'2',
-                    // noidi2: 'Tp Ho Chi Minh',
-                    // noiden2:'Ha Noi',
+                    // noidi2: 'Ha Noi',
+                    // noiden2:'Tp Ho Chi Minh',
                     // _token:token
 
                     /****Them hanh khach****/
-                    // songuoi: '2',
-                    // madatcho:'G6OU2V',
-                    // danhxung0:'mr',
-                    // ho0:'tran',
-                    // ten0:'a',
-                    // danhxung1:'ms',
-                    // ho1:'nguyen',
-                    // ten1:'b',
+                    // islienlac: 'false',
+                    // madatcho:'ABCXYZ',
+                    // danhxung:'mr',
+                    // ho:'tran',
+                    // ten:'a',
+                    // dienthoai:'01666473304',
+                    // email1:'sdasdas',
+                    // email2:'asdasdasdas',
                     // _token:token
 
 
                     /*** Cap nhat ma dat cho***/
-                    // madatcho:'',
+                    // madatcho:'0DLDSU',
                     //  _token:token
                     // _token:token
                 },

@@ -87,7 +87,9 @@ body{
  }
 
  /* Hiển thi view*/
-
+.displayview{
+    display: none;
+}
 /* kiêu chữ */
 .headertext{
     font-size: 25px;
